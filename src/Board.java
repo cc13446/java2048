@@ -23,7 +23,7 @@ public class Board {
         randomOneTile();
     }
 
-    public void randomOneTile() {
+    public int randomOneTile() {
         List<Tile> flat = new LinkedList<>();
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
@@ -32,11 +32,13 @@ public class Board {
                 }
             }
         }
+        if (flat.size() == 0) return 0;
         flat.get(random.nextInt(flat.size())).setId(2);
-
+        return flat.size();
     }
 
-    public void top() {
+    public long top() {
+        long res = 0;
         for (int j = 0; j < size; j++) {
             for (int i = 0; i < size; i++) {
                 for (int k = size - 1; k > i; k--) {
@@ -44,7 +46,7 @@ public class Board {
                 }
             }
             for (int i = 0; i < size - 1; i++) {
-                board[i][j].merge(board[i + 1][j]);
+                res += board[i][j].merge(board[i + 1][j]);
             }
             for (int i = 0; i < size; i++) {
                 for (int k = size - 1; k > i; k--) {
@@ -52,8 +54,10 @@ public class Board {
                 }
             }
         }
+        return res;
     }
-    public void left() {
+    public long left() {
+        long res = 0;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 for (int k = size - 1; k > j; k--) {
@@ -61,7 +65,7 @@ public class Board {
                 }
             }
             for (int j = 0; j < size - 1; j++) {
-                board[i][j].merge(board[i][j + 1]);
+                res += board[i][j].merge(board[i][j + 1]);
             }
             for (int j = 0; j < size; j++) {
                 for (int k = size - 1; k > j; k--) {
@@ -69,8 +73,10 @@ public class Board {
                 }
             }
         }
+        return res;
     }
-    public void down() {
+    public long down() {
+        long res = 0;
         for (int j = 0; j < size; j++) {
             for (int i = size - 1; i >= 0; i--) {
                 for (int k = 0; k < i; k++) {
@@ -78,7 +84,7 @@ public class Board {
                 }
             }
             for (int i = size - 1; i > 0; i--) {
-                board[i][j].merge(board[i - 1][j]);
+                res += board[i][j].merge(board[i - 1][j]);
             }
             for (int i = size - 1; i >= 0; i--) {
                 for (int k = 0; k < i; k++) {
@@ -86,8 +92,10 @@ public class Board {
                 }
             }
         }
+        return res;
     }
-    public void right() {
+    public long right() {
+        long res = 0;
         for (int i = 0; i < size; i++) {
             for (int j = size - 1; j > 0; j--) {
                 for (int k = 0; k < j; k++) {
@@ -95,7 +103,7 @@ public class Board {
                 }
             }
             for (int j = size - 1; j > 0; j--) {
-                board[i][j].merge(board[i][j - 1]);
+                res += board[i][j].merge(board[i][j - 1]);
             }
             for (int j = size - 1; j > 0; j--) {
                 for (int k = 0; k < j; k++) {
@@ -103,6 +111,7 @@ public class Board {
                 }
             }
         }
+        return res;
     }
 
     @Override

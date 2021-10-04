@@ -20,11 +20,14 @@ public class Tile {
             tile.setId(temp);
         }
     }
-    public void merge(Tile tile) {
+    public long merge(Tile tile) {
+        long res = 0;
         if (this.id == tile.getId()) {
+            res = this.id;
             this.id *= 2;
             tile.setId(0);
         }
+        return res;
     }
 
     @Override
