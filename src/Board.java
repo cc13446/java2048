@@ -32,8 +32,15 @@ public class Board {
                 }
             }
         }
-        if (flat.size() == 0) return 0;
-        flat.get(random.nextInt(flat.size())).setId(2);
+        if (flat.size() == 0) {
+            return 0;
+        }
+        // 大概率出2 小概率出4
+        int newID = 2;
+        if (random.nextInt(100) >= 90) {
+           newID = 4;
+        }
+        flat.get(random.nextInt(flat.size())).setId(newID);
         return flat.size();
     }
 
@@ -126,5 +133,15 @@ public class Board {
         }
 
         return sb.toString();
+    }
+
+    public int[][] getArray() {
+        int[][] array = new int[size][size];
+        for (int i = 0; i < this.size; i++) {
+            for (int j = 0; j < this.size; j++) {
+                array[i][j] = board[i][j].getId();
+            }
+        }
+        return array;
     }
 }
